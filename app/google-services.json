@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1092597636296",
+    "project_id": "ff14raidfarming",
+    "storage_bucket": "ff14raidfarming.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092597636296:android:f385e877174922442d19fd",
+        "android_client_info": {
+          "package_name": "com.mary.raidfarmingprogram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1092597636296-tvl74923cprrngfjh1ie67pr5oks7mo6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mary.raidfarmingprogram",
+            "certificate_hash": "3bb215588d95b21902e9b68d23e4f67b5dc9412d"
+          }
+        },
+        {
+          "client_id": "1092597636296-6dsui6s25ci3ccthfn6t1e8dgaa58nm5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWvo4UVkXACjHZlBdMUE3NiXx9wuD-FX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1092597636296-6dsui6s25ci3ccthfn6t1e8dgaa58nm5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

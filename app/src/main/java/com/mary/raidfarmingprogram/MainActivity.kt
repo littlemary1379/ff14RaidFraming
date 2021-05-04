@@ -13,9 +13,12 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.mary.raidfarmingprogram.constant.Constant
+import com.mary.raidfarmingprogram.constant.MemberInfo
 import com.mary.raidfarmingprogram.constant.SensitiveInfo
+import com.mary.raidfarmingprogram.util.ActivityUtil
 import com.mary.raidfarmingprogram.util.DlogUtil
 import com.mary.raidfarmingprogram.util.ViewUtil
 import java.lang.Exception
@@ -31,6 +34,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var auth : FirebaseAuth
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +57,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-        var account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
         super.onStart()
+        val currentUser = auth.currentUser
+
+        if(currentUser != null) {
+            DlogUtil.d(TAG, "auth : ${currentUser.email}")
+            MemberInfo.googleEmail = currentUser.email
+            ActivityUtil.startActivityWithFinish(this, ListActivity::class.java)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -102,10 +113,26 @@ class MainActivity : AppCompatActivity() {
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful) {
                 DlogUtil.d(TAG, auth.currentUser)
+
+                setDb()
+                ActivityUtil.startActivityWithFinish(this, ListActivity::class.java)
+
             } else {
                 DlogUtil.d(TAG, "error ${it.exception}")
             }
         }
+    }
+
+    private fun setDb(){
+        val db = Firebase.firestore
+        val data = hashMapOf(
+            "email" to auth.currentUser.email,
+            "name" to auth.currentUser.displayName
+        )
+        db.collection("/user").document(auth.currentUser.uid)
+            .set(data)
+            .addOnSuccessListener { DlogUtil.d(TAG, "firebase 저장 성공") }
+            .addOnFailureListener { DlogUtil.d(TAG, "firebase 저장 실패") }
     }
 
 

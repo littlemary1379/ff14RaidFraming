@@ -3,5 +3,6 @@
 
     <!--list-->
     <string name="list_no_list_explain">가입한 파티가 없습니다.\n공대장에게 코드를 받아 가입하거나,\n새로 파티를 만드세요.</string>
+    <string name="make_party_explain">파티의 이름과 성격을 정해주세요.</string>
 
 </resources>

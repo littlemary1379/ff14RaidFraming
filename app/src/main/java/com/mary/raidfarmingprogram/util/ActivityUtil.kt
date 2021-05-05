@@ -10,4 +10,9 @@ object ActivityUtil {
         activity.startActivity(intent)
         activity.finish()
     }
+
+    fun startActivityWithoutFinish(activity: Activity, cls : Class<*>){
+        var intent = Intent(activity, cls)
+        activity.startActivity(intent)
+    }
 }
